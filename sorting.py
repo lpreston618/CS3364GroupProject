@@ -25,8 +25,8 @@ def insertionSort(array: list[int]):
 
 
 # Partition a list according to the quicksort algorithm. Uses the middle element
-# as a pivot. Returns two partitions: the elements lesser than the pivot, and
-# the elements greater than or equal to the pivot.
+# as a pivot. Returns three partitions: the elements lesser than the pivot, elements
+# equalt to the pivot, and elements greater than the pivot.
 # Assumes that array has at least two elements - it's up to the algorithms
 # calling partition to ensure correct usage.
 def partition(array: list[int]):
@@ -44,6 +44,9 @@ def partition(array: list[int]):
     return lower, same, upper
 
 
+# Classic quicksort algorithm - recursively sort the array into partitions,
+# sort the partition, then stitch back together and return. Does NOT operate in place -
+# returns a new list that is a sorted version of the original.
 def quicksortClassic(array: list[int]) -> list[int]:
     if len(array) <= 1:
         return array
@@ -51,6 +54,8 @@ def quicksortClassic(array: list[int]) -> list[int]:
     return quicksortClassic(left) + same + quicksortClassic(right)
 
 
+# Our hybrid sort - quicksorts until the array length is less than or equal to k,
+# our threshold, then we hand it over to the insertion sort algorithm.
 def quicksortHybrid(array: list[int], threshold: int) -> list[int]:
     if len(array) <= threshold:
         insertionSort(array)
