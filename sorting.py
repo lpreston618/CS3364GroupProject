@@ -15,13 +15,14 @@ def insertionSort(array: list[int]):
         # Sort the i_th element into place
         for j in range(i, 0, -1):
             # Swap the i_th element down until it finds its place in the sorted subarray
-            if array[j] < array[j-1]:
+            if array[j] < array[j - 1]:
                 temp = array[j]
-                array[j] = array[j-1]
-                array[j-1] = temp
+                array[j] = array[j - 1]
+                array[j - 1] = temp
             # Once it finds its place, stop the inner loop and move on to the next element.
             else:
                 break
+
 
 # Partition a list according to the quicksort algorithm. Uses the middle element
 # as a pivot. Returns two partitions: the elements lesser than the pivot, and
@@ -29,8 +30,8 @@ def insertionSort(array: list[int]):
 # Assumes that array has at least two elements - it's up to the algorithms
 # calling partition to ensure correct usage.
 def partition(array: list[int]):
-    lower: list[int] = []
-    upper: list[int] = []
+    lower = []
+    upper = []
     same = []
     pivot = array[len(array) // 2]
     for x in array:
@@ -41,6 +42,7 @@ def partition(array: list[int]):
         else:
             upper.append(x)
     return lower, same, upper
+
 
 def quicksortClassic(array: list[int]) -> list[int]:
     if len(array) <= 1:
@@ -59,9 +61,10 @@ def quicksortHybrid(array: list[int], threshold: int) -> list[int]:
 
 if __name__ == "__main__":
     import random
+
     MAXLEN = 30
     THRESHOLD = 7
-    myArray = [x for x in range(1,MAXLEN + 1)]
+    myArray = [x for x in range(1, MAXLEN + 1)]
     myarray = random.shuffle(myArray)
     print(myArray)
     print("\n\n ==== SORTING ====")
