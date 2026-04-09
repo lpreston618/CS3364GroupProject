@@ -43,7 +43,7 @@ def main():
         output.write("Hybrid Sort data: (n,k,time)\n")
         # Test at different values of n
         n = 100
-        kvals = [2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000]
+        kvals = [x for x in range(2, 50, 2)]
         for _ in range(10):
             # For each n value, test different k values. We'll use some preset values for k,
             # and we won't test when k > n/2. Thus, as we scale up n, we'll test more k values.
