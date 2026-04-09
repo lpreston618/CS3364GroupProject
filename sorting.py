@@ -1,7 +1,7 @@
 # CS 3364-002 Group Project
 # Logan Preston
 # Abenezer Setegn
-#
+# Luis Baeza
 
 
 # Implementations of three sorting algorithms: Insertion Sort, Quicksort, and a
