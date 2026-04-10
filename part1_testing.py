@@ -42,28 +42,28 @@ def main():
         print("Writing data to part1data.txt ...")
         output.write("Hybrid Sort data: (n,k,time)\n")
         # Test at different values of n
-        n = 100
-        kvals = [x for x in range(2, 50, 2)]
-        for _ in range(10):
+        n = 10000
+        kvals = [x for x in range(1, 26, 2)]
+        for _ in range(6):
             # For each n value, test different k values. We'll use some preset values for k,
             # and we won't test when k > n/2. Thus, as we scale up n, we'll test more k values.
             for k in kvals:
                 if k > n / 2:
                     break
-                # We'll average runtime across three trials
-                test1 = getShuffledList(n)
-                test2 = getShuffledList(n)
-                test3 = getShuffledList(n)
 
-                start = timer()
-                sorted1 = sorting.quicksortHybrid(test1, k)
-                sorted2 = sorting.quicksortHybrid(test2, k)
-                sorted3 = sorting.quicksortHybrid(test3, k)
-                end = timer()
-                elapsed = end - start
-                average = elapsed / 3
+                print(f"n={n}, k={k}")
+                total_sorting_time = 0
+                TRIALS = 3
+                # average runtime over multiple trials
+                for _ in range(TRIALS):
+                    unsorted = getShuffledList(n)
+                    start = timer()
+                    sorted = sorting.quicksortHybrid(unsorted, k)
+                    end = timer()
+                    total_sorting_time += end - start
+                average = total_sorting_time / TRIALS
                 output.write(f"{n},{k},{average}\n")
-            n *= 2
+            n += 80000
 
 
 if __name__ == "__main__":

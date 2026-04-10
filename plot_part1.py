@@ -1,5 +1,6 @@
-import matplotlib.pyplot as plt
 from collections import defaultdict
+
+import matplotlib.pyplot as plt
 
 data = defaultdict(list)  # n -> list of (k, time)
 
@@ -13,9 +14,16 @@ with open("part1data.txt", "r") as f:
         data[int(n)].append((int(k), float(t)))
 
 colors = [
-    "#e6194b", "#3cb44b", "#4363d8", "#f58231",
-    "#911eb4", "#42d4f4", "#f032e6", "#bfef45",
-    "#fabed4", "#469990",
+    "#e6194b",
+    "#3cb44b",
+    "#4363d8",
+    "#f58231",
+    "#911eb4",
+    "#42d4f4",
+    "#f032e6",
+    "#bfef45",
+    "#fabed4",
+    "#469990",
 ]
 
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -30,8 +38,8 @@ ax.set_xlabel("Threshold k")
 ax.set_ylabel("Average Time (seconds)")
 ax.set_title("Hybrid Quicksort Runtime: Time vs. Threshold k (by array size n)")
 ax.legend(title="Array size")
-ax.set_xscale("log")
-ax.set_yscale("log")
+# ax.set_xscale("log")
+ax.set_yscale("linear")
 ax.grid(True, which="both", linestyle="--", alpha=0.5)
 
 plt.tight_layout()
