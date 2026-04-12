@@ -1,4 +1,3 @@
-from os import write
 from random import shuffle
 from timeit import default_timer as timer
 
@@ -36,34 +35,57 @@ def main():
     testarray = getShuffledList(20)
     verifySort(testarray)
 
-    # Produce test data for different k,n values
-    with open("part1data.txt", "w") as output:
-        print("=== Producing runtime data for hybrid sort ===")
-        print("Writing data to part1data.txt ...")
-        output.write("Hybrid Sort data: (n,k,time)\n")
-        # Test at different values of n
-        n = 10000
-        kvals = [x for x in range(1, 26, 2)]
-        for _ in range(6):
-            # For each n value, test different k values. We'll use some preset values for k,
-            # and we won't test when k > n/2. Thus, as we scale up n, we'll test more k values.
-            for k in kvals:
-                if k > n / 2:
-                    break
+    # # Produce test data for different k,n values
+    # with open("part1data.txt", "w") as output:
+    #     print("=== Producing runtime data for hybrid sort ===")
+    #     print("Writing data to part1data.txt ...")
+    #     output.write("Hybrid Sort data: (n,k,time)\n")
+    #     # Test at different values of n
+    #     n = 10000
+    #     kvals = [x for x in range(1, 26, 2)]
+    #     for _ in range(6):
+    #         # For each n value, test different k values. We'll use some preset values for k,
+    #         # and we won't test when k > n/2. Thus, as we scale up n, we'll test more k values.
+    #         for k in kvals:
+    #             if k > n / 2:
+    #                 break
+    #             print(f"n={n}, k={k}")
+    #             total_sorting_time = 0
+    #             TRIALS = 3
+    #             # average runtime over multiple trials
+    #             for _ in range(TRIALS):
+    #                 unsorted = getShuffledList(n)
+    #                 start = timer()
+    #                 sorted = sorting.quicksortHybrid(unsorted, k)
+    #                 end = timer()
+    #                 total_sorting_time += end - start
+    #             average = total_sorting_time / TRIALS
+    #             output.write(f"{n},{k},{average}\n")
+    #         n += 80000
 
-                print(f"n={n}, k={k}")
-                total_sorting_time = 0
-                TRIALS = 3
-                # average runtime over multiple trials
-                for _ in range(TRIALS):
-                    unsorted = getShuffledList(n)
-                    start = timer()
-                    sorted = sorting.quicksortHybrid(unsorted, k)
-                    end = timer()
-                    total_sorting_time += end - start
-                average = total_sorting_time / TRIALS
-                output.write(f"{n},{k},{average}\n")
-            n += 80000
+    with open("part1output2.txt", "w") as output:
+        print("Comparing hybrid sort to Quicksort, Insertion sort")
+        print("Writing data to part1output2.txt")
+        nvals = [10, 50, 100, 1000, 10_000, 20_000, 30_000, 40_000, 50_000]
+        k = 10
+        for n in nvals:
+            print(f"n = {n}")
+            # Get three copies of the same random array
+            array1 = getShuffledList(n)
+            array2 = array1[:]
+            array3 = array1[:]
+            start = timer()
+            sorting.insertionSort(array1)
+            split1 = timer()
+            sorting.quicksortClassic(array2)
+            split2 = timer()
+            sorting.quicksortHybrid(array3, k)
+            end = timer()
+
+            insertion_time = split1 - start
+            qclassic_time = split2 - split1
+            qhybrid_time = end - split2
+            output.write(f"{n},{insertion_time},{qclassic_time},{qhybrid_time}\n")
 
 
 if __name__ == "__main__":
