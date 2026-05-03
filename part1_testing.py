@@ -16,15 +16,17 @@ def getShuffledList(n: int):
     return mylist
 
 
-# Verify that our hybrid sorting algorithm matches python's built-in sort
+# Verify that our hybrid sorting algorithm matches
+# python's built-in sort.
 def verifySort(array):
     print("=== Verifying correctness of hybrid sort ===")
     print("Sorting test array:\t" + str(array))
-    arraycopy = array[:]  # make a copy of the test array
-    arraycopy.sort()  # sort the copy with python's built-in sorting algorithm
-    array = sorting.quicksortHybrid(
-        array, 5
-    )  # sort array with our hybrid algorithm with a sample threshold of 5
+    # make a copy of the test array
+    arraycopy = array[:]
+    # sort the copy with python's built-in sorting algorithm
+    arraycopy.sort() 
+    # sort array with our hybrid algorithm with a threshold of 5
+    array = sorting.quicksortHybrid(array, 5)
     print("Python's sort:\t\t" + str(arraycopy))
     print("Our hybrid sort:\t" + str(array))
     print("Our output matches Python's: " + str(array == arraycopy))
@@ -63,30 +65,30 @@ def main():
     #             output.write(f"{n},{k},{average}\n")
     #         n += 80000
 
-    with open("part1output2.txt", "w") as output:
-        print("Comparing hybrid sort to Quicksort, Insertion sort")
-        print("Writing data to part1output2.txt")
-        nvals = [10, 50, 100, 1000, 10_000, 20_000, 30_000, 40_000, 50_000]
-        k = 10
-        for n in nvals:
-            print(f"n = {n}")
-            # Get three copies of the same random array
-            array1 = getShuffledList(n)
-            array2 = array1[:]
-            array3 = array1[:]
-            start = timer()
-            sorting.insertionSort(array1)
-            split1 = timer()
-            sorting.quicksortClassic(array2)
-            split2 = timer()
-            sorting.quicksortHybrid(array3, k)
-            end = timer()
-
-            insertion_time = split1 - start
-            qclassic_time = split2 - split1
-            qhybrid_time = end - split2
-            output.write(f"{n},{insertion_time},{qclassic_time},{qhybrid_time}\n")
-
+    # with open("part1output2.txt", "w") as output:
+    #     print("Comparing hybrid sort to Quicksort, Insertion sort")
+    #     print("Writing data to part1output2.txt")
+    #     nvals = [10, 50, 100, 1000, 10_000, 20_000, 30_000, 40_000, 50_000]
+    #     k = 10
+    #     for n in nvals:
+    #         print(f"n = {n}")
+    #         # Get three copies of the same random array
+    #         array1 = getShuffledList(n)
+    #         array2 = array1[:]
+    #         array3 = array1[:]
+    #         start = timer()
+    #         sorting.insertionSort(array1)
+    #         split1 = timer()
+    #         sorting.quicksortClassic(array2)
+    #         split2 = timer()
+    #         sorting.quicksortHybrid(array3, k)
+    #         end = timer()
+    #
+    #         insertion_time = split1 - start
+    #         qclassic_time = split2 - split1
+    #         qhybrid_time = end - split2
+    #         output.write(f"{n},{insertion_time},{qclassic_time},{qhybrid_time}\n")
+    #
 
 if __name__ == "__main__":
     print("Testing Part 1 sorting algorithms...")
